@@ -13,7 +13,7 @@ Note: Do not import any other modules here.
         not imported here (e.g. for your plotting code).
 '''
 import numpy as np
-
+from project1_py.optimizers import *
 
 def optimize(f, g, x0, n, count, prob):
     """
@@ -29,6 +29,13 @@ def optimize(f, g, x0, n, count, prob):
     Returns:
         x_best (np.array): best selection of variables found
     """
-    x_best = x0
+
+    if prob == "simple2" or prob == "simple3":
+        x_values = RMSProp(f, g, x0, n, count, prob)
+        x_best = x_values[-1]
+
+    else:
+        x_values = Adam(f, g, x0, n, count, prob)
+        x_best = x_values[-1]
 
     return x_best
